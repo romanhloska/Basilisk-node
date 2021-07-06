@@ -34,10 +34,7 @@ use frame_support::sp_runtime::{
 };
 use frame_support::{dispatch::DispatchResult, ensure, traits::Get, transactional};
 use frame_system::ensure_signed;
-use primitives::{
-	asset::AssetPair, fee, traits::AMM, AssetId, Balance, Price, MAX_IN_RATIO, MAX_OUT_RATIO, MIN_POOL_LIQUIDITY,
-	MIN_TRADING_LIMIT,
-};
+use primitives::{asset::AssetPair, fee, traits::AMM, AssetId, Balance, Price, MAX_IN_RATIO, MAX_OUT_RATIO};
 use sp_std::{marker::PhantomData, vec, vec::Vec};
 
 use frame_support::sp_runtime::app_crypto::sp_core::crypto::UncheckedFrom;
@@ -101,26 +98,26 @@ pub mod pallet {
 		/// It is not allowed to create a pool between same assets.
 		CannotCreatePoolWithSameAssets,
 
-		/// Liquidity has not reached the required minimum.
-		InsufficientLiquidity,
-
-		/// Amount is less than min trading limit.
-		InsufficientTradingAmount,
-
-		/// Liquidity is zero.
-		ZeroLiquidity,
+		/// It is not allowed to create a pool with zero initial liquidity.
+		CannotCreatePoolWithZeroLiquidity,
 
 		/// It is not allowed to create a pool with zero initial price.
-		ZeroInitialPrice,
+		CannotCreatePoolWithZeroInitialPrice,
 
 		/// Overflow
 		CreatePoolAssetAmountInvalid,
+
+		/// It is not allowed to remove zero liquidity.
+		CannotRemoveLiquidityWithZero,
+
+		/// It is not allowed to add zero liquidity.
+		CannotAddZeroLiquidity,
 
 		/// Overflow
 		InvalidMintedLiquidity, // No tests - but it is currently not possible this error to occur due to previous checks in the code.
 
 		/// Overflow
-		InvalidLiquidityAmount, // no tests - it is currently not possible this error to occur due to previous checks in the code.
+		InvalidLiquidityAmount, // no tests
 
 		/// Asset amount has exceeded given limit.
 		AssetAmountExceededLimit,
@@ -132,10 +129,10 @@ pub mod pallet {
 		InsufficientAssetBalance,
 
 		/// Not enough asset liquidity in the pool.
-		InsufficientPoolAssetBalance,
+		InsufficientPoolAssetBalance, // No tests
 
 		/// Not enough core asset liquidity in the pool.
-		InsufficientNativeCurrencyBalance,
+		InsufficientNativeCurrencyBalance, // No tests
 
 		/// Liquidity pool for given assets does not exist.
 		TokenPoolNotFound,
@@ -151,10 +148,8 @@ pub mod pallet {
 		SellAssetAmountInvalid, // no tests
 		/// Overflow
 		BuyAssetAmountInvalid, // no tests
-
 		/// Overflow
-		FeeAmountInvalid,
-
+		FeeAmountInvalid, // no tests
 		/// Overflow
 		CannotApplyDiscount,
 
@@ -223,9 +218,11 @@ pub mod pallet {
 		) -> DispatchResultWithPostInfo {
 			let who = ensure_signed(origin)?;
 
-			ensure!(amount >= MIN_POOL_LIQUIDITY, Error::<T>::InsufficientLiquidity);
-
-			ensure!(!(initial_price == Price::zero()), Error::<T>::ZeroInitialPrice);
+			ensure!(!amount.is_zero(), Error::<T>::CannotCreatePoolWithZeroLiquidity);
+			ensure!(
+				!(initial_price == Price::zero()),
+				Error::<T>::CannotCreatePoolWithZeroInitialPrice
+			);
 
 			ensure!(asset_a != asset_b, Error::<T>::CannotCreatePoolWithSameAssets);
 
@@ -296,9 +293,9 @@ pub mod pallet {
 
 			ensure!(Self::exists(asset_pair), Error::<T>::TokenPoolNotFound);
 
-			ensure!(amount_a >= MIN_TRADING_LIMIT, Error::<T>::InsufficientTradingAmount);
+			ensure!(!amount_a.is_zero(), Error::<T>::CannotAddZeroLiquidity);
 
-			ensure!(!amount_b_max_limit.is_zero(), Error::<T>::ZeroLiquidity);
+			ensure!(!amount_b_max_limit.is_zero(), Error::<T>::CannotAddZeroLiquidity);
 
 			ensure!(
 				T::Currency::free_balance(asset_a, &who) >= amount_a,
@@ -314,8 +311,6 @@ pub mod pallet {
 
 			let share_token = Self::share_token(&pair_account);
 
-			let account_shares = T::Currency::free_balance(share_token, &who);
-
 			let asset_a_reserve = T::Currency::free_balance(asset_a, &pair_account);
 			let asset_b_reserve = T::Currency::free_balance(asset_b, &pair_account);
 			let total_liquidity = Self::total_liquidity(&pair_account);
@@ -330,16 +325,7 @@ pub mod pallet {
 				Error::<T>::AssetAmountExceededLimit
 			);
 
-			ensure!(!shares_added.is_zero(), Error::<T>::InvalidMintedLiquidity);
-
-			// Make sure that account share liquidity is at least MIN_POOL_LIQUIDITY
-			ensure!(
-				account_shares
-					.checked_add(shares_added)
-					.ok_or(Error::<T>::InvalidMintedLiquidity)?
-					>= MIN_POOL_LIQUIDITY,
-				Error::<T>::InsufficientLiquidity
-			);
+			ensure!(shares_added > 0_u128, Error::<T>::InvalidMintedLiquidity);
 
 			let liquidity_amount = total_liquidity
 				.checked_add(shares_added)
@@ -384,7 +370,7 @@ pub mod pallet {
 				asset_out: asset_b,
 			};
 
-			ensure!(!liquidity_amount.is_zero(), Error::<T>::ZeroLiquidity);
+			ensure!(!liquidity_amount.is_zero(), Error::<T>::CannotRemoveLiquidityWithZero);
 
 			ensure!(Self::exists(asset_pair), Error::<T>::TokenPoolNotFound);
 
@@ -394,18 +380,14 @@ pub mod pallet {
 
 			let total_shares = Self::total_liquidity(&pair_account);
 
-			let account_shares = T::Currency::free_balance(share_token, &who);
-
 			ensure!(total_shares >= liquidity_amount, Error::<T>::InsufficientAssetBalance);
 
-			ensure!(account_shares >= liquidity_amount, Error::<T>::InsufficientAssetBalance);
-
-			// Account's liquidity left should be either 0 or at least MIN_POOL_LIQUIDITY
 			ensure!(
-				(account_shares - liquidity_amount) >= MIN_POOL_LIQUIDITY
-					|| (account_shares - liquidity_amount).is_zero(),
-				Error::<T>::InsufficientLiquidity
+				T::Currency::free_balance(share_token, &who) >= liquidity_amount,
+				Error::<T>::InsufficientAssetBalance
 			);
+
+			ensure!(!total_shares.is_zero(), Error::<T>::CannotRemoveLiquidityWithZero);
 
 			let asset_a_reserve = T::Currency::free_balance(asset_a, &pair_account);
 			let asset_b_reserve = T::Currency::free_balance(asset_b, &pair_account);
@@ -597,8 +579,6 @@ impl<T: Config> AMM<T::AccountId, AssetId, AssetPair, Balance> for Pallet<T> {
 		min_bought: Balance,
 		discount: bool,
 	) -> Result<AMMTransfer<T::AccountId, AssetId, AssetPair, Balance>, sp_runtime::DispatchError> {
-		ensure!(amount >= MIN_TRADING_LIMIT, Error::<T>::InsufficientTradingAmount);
-
 		ensure!(Self::exists(assets), Error::<T>::TokenPoolNotFound);
 
 		ensure!(
@@ -734,8 +714,6 @@ impl<T: Config> AMM<T::AccountId, AssetId, AssetPair, Balance> for Pallet<T> {
 		max_limit: Balance,
 		discount: bool,
 	) -> Result<AMMTransfer<T::AccountId, AssetId, AssetPair, Balance>, DispatchError> {
-		ensure!(amount >= MIN_TRADING_LIMIT, Error::<T>::InsufficientTradingAmount);
-
 		ensure!(Self::exists(assets), Error::<T>::TokenPoolNotFound);
 
 		let pair_account = Self::get_pair_id(assets);
