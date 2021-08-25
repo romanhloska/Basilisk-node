@@ -133,9 +133,11 @@ runtime-benchmarks = [
     "pallet-xyk/runtime-benchmarks",
     "pallet-exchange-benchmarking",
     "pallet-lbp/runtime-benchmarks",
+    "pallet-duster/runtime-benchmarks",
     'sp-runtime/runtime-benchmarks',
     'pallet-collator-selection/runtime-benchmarks',
     "pallet-xcm/runtime-benchmarks",
+    "pallet-democracy/runtime-benchmarks",
     "xcm-builder/runtime-benchmarks",
 ]
 std = [
