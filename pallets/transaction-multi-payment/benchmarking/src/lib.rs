@@ -24,9 +24,12 @@ use sp_std::vec;
 
 use frame_benchmarking::{account, benchmarks};
 use frame_system::RawOrigin;
-use orml_traits::{MultiCurrency, MultiCurrencyExtended};
+use orml_traits::MultiCurrencyExtended;
 use pallet_transaction_multi_payment::Pallet as MultiPaymentModule;
 use primitives::{Amount, AssetId, Balance, Price};
+
+#[cfg(test)]
+use orml_traits::MultiCurrency;
 
 use frame_support::dispatch;
 use pallet_xyk as xykpool;
@@ -77,6 +80,7 @@ benchmarks! {
 	}: { MultiPaymentModule::<T>::swap_currency(&caller, 1000)? }
 	verify{
 		assert_eq!(MultiPaymentModule::<T>::get_currency(caller.clone()), Some(ASSET_ID));
+		#[cfg(test)]
 		assert_eq!(T::MultiCurrency::free_balance(ASSET_ID, &caller), 9999689661666);
 	}
 
