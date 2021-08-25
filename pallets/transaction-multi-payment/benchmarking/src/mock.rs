@@ -69,7 +69,7 @@ frame_support::construct_runtime!(
 				 Currencies: orml_currencies::{Pallet, Event<T>},
 				 Tokens: orml_tokens::{Pallet, Event<T>},
 				 AssetRegistry: pallet_asset_registry::{Pallet, Storage},
-				 transaction_payment: pallet_transaction_payment::{Pallet, Storage},
+				 TransactionPayment: pallet_transaction_payment::{Pallet, Storage},
 		 }
 
 );
@@ -82,7 +82,7 @@ parameter_types! {
 	pub const MaxLocks: u32 = 50;
 	pub const TransactionByteFee: Balance = 1;
 	pub ExchangeFeeRate: fee::Fee = fee::Fee::default();
-	pub PayForSetCurrency : Pays = Pays::No;
+	pub PayForSetCurrency : Pays = Pays::Yes;
 }
 
 impl system::Config for Test {

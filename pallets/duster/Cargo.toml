@@ -36,15 +36,17 @@ frame-system = {default-features = false, version = '3.0.0'}
 frame-system-benchmarking = {default-features = false, optional = true, version = '3.0.0'}
 frame-benchmarking = {default-features = false, optional = true, version = '3.0.0'}
 
+# These should be in dev dependencies but some builds are failing - investigate!
+primitives = {path = '../../primitives', default-features = false}
+lazy_static = {features = ['spin_no_std'], version = "1.4.0"}
+pallet-balances = {default-features = false, version = '3.0.0'}
+sp-core = {default-features = false, version = '3.0.0'}
+sp-runtime = {default-features = false, version = '3.0.0'}
+orml-tokens = {default-features = false, version = "0.4.1-dev"}
+
 [dev-dependencies]
 sp-io = {default-features = false, version = '3.0.0'}
 orml-currencies = {default-features = false, version = "0.4.1-dev"}
-orml-tokens = {default-features = false, version = "0.4.1-dev"}
-primitives = {path = '../../primitives', default-features = false}
-lazy_static = {features = ['spin_no_std'], version = "1.4.0"}
-sp-core = {default-features = false, version = '3.0.0'}
-sp-runtime = {default-features = false, version = '3.0.0'}
-pallet-balances = {default-features = false, version = '3.0.0'}
 
 [features]
 default = ['std']
