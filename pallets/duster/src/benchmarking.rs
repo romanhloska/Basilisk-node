@@ -47,11 +47,13 @@ benchmarks! {
 		T::MultiCurrency::update_balance(asset_id, &to_dust_account, dust_amount).unwrap();
 		assert_eq!(T::MultiCurrency::free_balance(1u32.into(), &to_dust_account), dust_amount.try_into().ok().unwrap());
 
+		let current_balance = T::MultiCurrency::free_balance(asset_id, &crate::Pallet::<T>::dust_dest_account());
+
 	}: _(RawOrigin::Signed(caller.clone()), to_dust_account.clone(),1u32.into())
 	verify {
 		assert_eq!(T::MultiCurrency::free_balance(1u32.into(), &to_dust_account), 0u32.into());
 		assert_eq!(T::MultiCurrency::free_balance(0u32.into(), &caller), reward);
-		assert_eq!(T::MultiCurrency::free_balance(1u32.into(), &crate::Pallet::<T>::dust_dest_account()), dust_amount.try_into().ok().unwrap());
+		assert_eq!(T::MultiCurrency::free_balance(1u32.into(), &crate::Pallet::<T>::dust_dest_account()), current_balance + dust_amount.try_into().ok().unwrap());
 	}
 }
 
