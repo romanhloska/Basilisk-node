@@ -439,7 +439,7 @@ impl pallet_exchange::Config for Runtime {
 }
 
 parameter_types! {
-	pub const DustingReward: u128 = 0;t
+	pub const DustingReward: u128 = 0;
 }
 
 impl pallet_duster::Config for Runtime {
