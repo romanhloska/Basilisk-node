@@ -369,7 +369,7 @@ impl pallet_transaction_multi_payment::Config for Runtime {
 	type Currency = Balances;
 	type MultiCurrency = Currencies;
 	type AMMPool = XYK;
-	type WeightInfo = weights::payment::HydraWeight<Runtime>;
+	type WeightInfo = weights::payment::BasiliskWeight<Runtime>;
 	type WithdrawFeeForSetCurrency = MultiPaymentCurrencySetFee;
 	type WeightToFee = WeightToFee;
 }
@@ -420,7 +420,7 @@ impl pallet_xyk::Config for Runtime {
 	type AssetPairAccountId = pallet_xyk::AssetPairAccountId<Self>;
 	type Currency = Currencies;
 	type NativeAssetId = NativeAssetId;
-	type WeightInfo = weights::xyk::HydraWeight<Runtime>;
+	type WeightInfo = weights::xyk::BasiliskWeight<Runtime>;
 	type GetExchangeFee = ExchangeFee;
 }
 
