@@ -35,17 +35,6 @@ use frame_support::{
 };
 use sp_std::marker::PhantomData;
 
-/// Weight functions needed for {{pallet}}.
-pub trait WeightInfo {
-{{~#each benchmarks as |benchmark|}}
-    fn {{benchmark.name~}}
-(
-{{~#each benchmark.components as |c| ~}}
-    {{c.name}}: u32, {{/each~}}
-    ) -> Weight;
-{{~/each}}
-}
-
 use pallet_{{pallet}}::weights::WeightInfo;
 
 pub struct BasiliskWeight<T>(PhantomData<T>);
