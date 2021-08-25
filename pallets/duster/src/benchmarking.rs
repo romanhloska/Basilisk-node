@@ -38,6 +38,7 @@ benchmarks! {
 		let to_dust_account = funded_account::<T>("dust", 0);
 
 		let asset_id: T::CurrencyId = T::CurrencyId::from(1u32);
+		let reward = T::Reward::get();
 
 		let min_deposit = T::MinCurrencyDeposits::get(&asset_id);
 
@@ -49,7 +50,7 @@ benchmarks! {
 	}: _(RawOrigin::Signed(caller.clone()), to_dust_account.clone(),1u32.into())
 	verify {
 		assert_eq!(T::MultiCurrency::free_balance(1u32.into(), &to_dust_account), 0u32.into());
-		assert_eq!(T::MultiCurrency::free_balance(0u32.into(), &caller), 10_000u32.into());
+		assert_eq!(T::MultiCurrency::free_balance(0u32.into(), &caller), reward);
 		assert_eq!(T::MultiCurrency::free_balance(1u32.into(), &crate::Pallet::<T>::dust_dest_account()), dust_amount.try_into().ok().unwrap());
 	}
 }
