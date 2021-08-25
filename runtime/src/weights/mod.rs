@@ -5,3 +5,4 @@ pub mod timestamp;
 pub mod xyk;
 pub mod balances;
 pub mod democracy;
+pub mod duster;

@@ -451,7 +451,7 @@ impl pallet_duster::Config for Runtime {
 	type MinCurrencyDeposits = DusterExistentialDeposits;
 	type Reward = DustingReward;
 	type NativeCurrencyId = NativeAssetId;
-	type WeightInfo = ();
+	type WeightInfo = weights::duster::BasiliskWeight<Runtime>;
 }
 
 parameter_types! {
