@@ -22,6 +22,8 @@ use super::*;
 use frame_benchmarking::{account, benchmarks};
 use frame_system::RawOrigin;
 
+use sp_std::vec;
+
 const SEED: u32 = 1;
 
 fn funded_account<T: Config>(name: &'static str, index: u32) -> T::AccountId {
@@ -60,11 +62,20 @@ benchmarks! {
 	verify {
 		let bname = crate::Pallet::<T>::to_bounded_name(new_name).unwrap();
 		assert_eq!(crate::Pallet::<T>::asset_ids(&bname), Some(T::AssetId::from(1u8)));
-		assert_eq!(crate::Pallet::<T>::assets(asset_id), Some(AssetDetails{
+
+		let stored = crate::Pallet::<T>::assets(asset_id);
+
+		assert!(stored.is_some());
+		let stored = stored.unwrap();
+
+		let expected = AssetDetails{
 			asset_type: AssetType::PoolShare(T::AssetId::from(10u8), T::AssetId::from(20u8)),
 			locked: false,
-			name: bname,
-		}));
+			name: bname.clone(),};
+
+		assert_eq!(stored.asset_type, expected.asset_type);
+		assert_eq!(stored.locked, expected.locked);
+		assert_eq!(stored.name.to_vec(), expected.name.to_vec());
 	}
 
 	set_metadata{
