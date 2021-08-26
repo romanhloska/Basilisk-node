@@ -97,6 +97,7 @@ pallet-collective = { default-features = false, version= '3.0.0' }
 pallet-grandpa = { default-features = false, version = '3.0.0' }
 pallet-randomness-collective-flip = { default-features = false, version = '3.0.0' }
 pallet-session = { default-features = false, version = '3.0.0' }
+pallet-session-benchmarking = { default-features = false, version = '3.0.0' }
 pallet-sudo = { default-features = false, version = '3.0.0' }
 pallet-timestamp = { default-features = false, version = '3.0.0' }
 pallet-transaction-payment = { default-features = false, version = '3.0.0' }
@@ -136,6 +137,8 @@ runtime-benchmarks = [
     "pallet-treasury/runtime-benchmarks",
     "pallet-scheduler/runtime-benchmarks",
     "pallet-utility/runtime-benchmarks",
+    "pallet-tips/runtime-benchmarks",
+    "pallet-session-benchmarking/std",
     # Basilisk
     "pallet-exchange-benchmarking",
     'pallet-multi-payment-benchmarking',

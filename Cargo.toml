@@ -15,6 +15,7 @@ pallet-democracy = { git = 'https://github.com/paritytech/substrate', branch = "
 pallet-grandpa = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
 pallet-randomness-collective-flip = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
 pallet-session = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
+pallet-session-benchmarking = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
 pallet-scheduler = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
 pallet-sudo = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
 pallet-tips = { git = 'https://github.com/paritytech/substrate', branch = "polkadot-v0.9.8" }
