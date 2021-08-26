@@ -8,3 +8,7 @@ pub mod registry;
 pub mod system;
 pub mod timestamp;
 pub mod xyk;
+pub mod scheduler;
+pub mod treasury;
+pub mod utility;
+
