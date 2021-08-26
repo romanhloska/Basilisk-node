@@ -133,6 +133,9 @@ runtime-benchmarks = [
     'pallet-collator-selection/runtime-benchmarks',
     "xcm-builder/runtime-benchmarks",
     "pallet-elections-phragmen/runtime-benchmarks",
+    "pallet-treasury/runtime-benchmarks",
+    "pallet-scheduler/runtime-benchmarks",
+    "pallet-utility/runtime-benchmarks",
     # Basilisk
     "pallet-exchange-benchmarking",
     'pallet-multi-payment-benchmarking',
