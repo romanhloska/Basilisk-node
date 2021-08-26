@@ -94,10 +94,20 @@ benchmarks! {
 		let bname = crate::Pallet::<T>::to_bounded_name(name).unwrap();
 		let bsymbol= crate::Pallet::<T>::to_bounded_name(max_symbol).unwrap();
 		assert_eq!(crate::Pallet::<T>::asset_ids(&bname), Some(T::AssetId::from(1u8)));
-		assert_eq!(crate::Pallet::<T>::asset_metadata(asset_id), Some(AssetMetadata{
+
+		let stored = crate::Pallet::<T>::asset_metadata(asset_id);
+
+		assert!(stored.is_some());
+
+		let stored = stored.unwrap();
+
+		let expected =AssetMetadata{
 			symbol: bsymbol,
 			decimals: 10u8
-		}));
+		};
+
+		assert_eq!(stored.symbol.to_vec(), expected.symbol.to_vec());
+		assert_eq!(stored.decimals, expected.decimals);
 	}
 
 	set_location{
