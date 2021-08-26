@@ -19,22 +19,13 @@
 
 use super::*;
 
-use frame_benchmarking::{account, benchmarks};
+use frame_benchmarking::benchmarks;
 use frame_system::RawOrigin;
 
 use sp_std::vec;
 
-const SEED: u32 = 1;
-
-fn funded_account<T: Config>(name: &'static str, index: u32) -> T::AccountId {
-	let caller: T::AccountId = account(name, index, SEED);
-	caller
-}
-
 benchmarks! {
 	register{
-		let caller = funded_account::<T>("caller", 0);
-
 		let name = vec![1; T::StringLimit::get() as usize];
 
 		// This makes sure that next asset id is equal to native asset id
@@ -48,8 +39,6 @@ benchmarks! {
 	}
 
 	update{
-		let caller = funded_account::<T>("caller", 0);
-
 		let name = b"NAME".to_vec();
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
 		let _ = crate::Pallet::<T>::register(RawOrigin::Root.into(), name.clone(), AssetType::Token);
@@ -79,8 +68,6 @@ benchmarks! {
 	}
 
 	set_metadata{
-		let caller = funded_account::<T>("caller", 0);
-
 		let name = b"NAME".to_vec();
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
 		let _ = crate::Pallet::<T>::register(RawOrigin::Root.into(), name.clone(), AssetType::Token);
@@ -111,8 +98,6 @@ benchmarks! {
 	}
 
 	set_location{
-		let caller = funded_account::<T>("caller", 0);
-
 		let name = b"NAME".to_vec();
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
 		let _ = crate::Pallet::<T>::register(RawOrigin::Root.into(), name.clone(), AssetType::Token);
