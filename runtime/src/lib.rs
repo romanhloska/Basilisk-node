@@ -428,7 +428,7 @@ impl pallet_asset_registry::Config for Runtime {
 	type AssetNativeLocation = AssetLocation;
 	type StringLimit = RegistryStrLimit;
 	type NativeAssetId = NativeAssetId;
-	type WeightInfo = weights::registry::BasiliskWeight<Runtimet >;
+	type WeightInfo = weights::registry::BasiliskWeight<Runtime>;
 }
 
 parameter_types! {
