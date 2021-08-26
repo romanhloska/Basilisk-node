@@ -451,7 +451,7 @@ impl pallet_exchange::Config for Runtime {
 	type AMMPool = XYK;
 	type Resolver = Exchange;
 	type Currency = Currencies;
-	type WeightInfo = weights::exchange::HydraWeight<Runtime>;
+	type WeightInfo = weights::exchange::BasiliskWeight<Runtime>;
 }
 
 parameter_types! {

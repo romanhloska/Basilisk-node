@@ -19,12 +19,12 @@
 //!
 //! THIS FILE WAS AUTO-GENERATED USING THE SUBSTRATE BENCHMARK CLI VERSION 3.0.0
 //! DATE: 2021-08-26, STEPS: [5, ], REPEAT: 20, LOW RANGE: [], HIGH RANGE: []
-//! EXECUTION: Some(Wasm), WASM-EXECUTION: Compiled, CHAIN: Some("dev"), DB CACHE: 128
+//! EXECUTION: Some(Wasm), WASM-EXECUTION: Compiled, CHAIN: Some("benchmarks"), DB CACHE: 128
 
 // Executed Command:
 // target/release/basilisk
 // benchmark
-// --chain=dev
+// --chain=benchmarks
 // --steps=5
 // --repeat=20
 // --execution=wasm
@@ -51,32 +51,32 @@ pub struct BasiliskWeight<T>(PhantomData<T>);
 
 impl<T: frame_system::Config> WeightInfo for BasiliskWeight<T> {
 	fn swap_currency() -> Weight {
-		(115_411_000 as Weight)
+		(113_226_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(6 as Weight))
 			.saturating_add(T::DbWeight::get().writes(4 as Weight))
 	}
 	fn set_currency() -> Weight {
-		(164_914_000 as Weight)
+		(159_458_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(6 as Weight))
 			.saturating_add(T::DbWeight::get().writes(5 as Weight))
 	}
 	fn add_currency() -> Weight {
-		(25_170_000 as Weight)
+		(24_399_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(2 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}
 	fn remove_currency() -> Weight {
-		(25_576_000 as Weight)
+		(24_931_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(2 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}
 	fn add_member() -> Weight {
-		(22_861_000 as Weight)
+		(22_262_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(1 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}
 	fn remove_member() -> Weight {
-		(23_837_000 as Weight)
+		(22_847_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(1 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}

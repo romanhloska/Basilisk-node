@@ -19,12 +19,12 @@
 //!
 //! THIS FILE WAS AUTO-GENERATED USING THE SUBSTRATE BENCHMARK CLI VERSION 3.0.0
 //! DATE: 2021-08-26, STEPS: [5, ], REPEAT: 20, LOW RANGE: [], HIGH RANGE: []
-//! EXECUTION: Some(Wasm), WASM-EXECUTION: Compiled, CHAIN: Some("dev"), DB CACHE: 128
+//! EXECUTION: Some(Wasm), WASM-EXECUTION: Compiled, CHAIN: Some("benchmarks"), DB CACHE: 128
 
 // Executed Command:
 // target/release/basilisk
 // benchmark
-// --chain=dev
+// --chain=benchmarks
 // --steps=5
 // --repeat=20
 // --execution=wasm
@@ -51,42 +51,42 @@ pub struct BasiliskWeight<T>(PhantomData<T>);
 
 impl<T: frame_system::Config> WeightInfo for BasiliskWeight<T> {
 	fn create_pool() -> Weight {
-		(136_112_000 as Weight)
+		(129_583_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(7 as Weight))
 			.saturating_add(T::DbWeight::get().writes(6 as Weight))
 	}
 	fn update_pool_data() -> Weight {
-		(30_872_000 as Weight)
+		(29_801_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(1 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}
 	fn pause_pool() -> Weight {
-		(27_424_000 as Weight)
+		(26_328_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(1 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}
 	fn unpause_pool() -> Weight {
-		(27_473_000 as Weight)
+		(26_041_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(1 as Weight))
 			.saturating_add(T::DbWeight::get().writes(1 as Weight))
 	}
 	fn add_liquidity() -> Weight {
-		(97_608_000 as Weight)
+		(94_902_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(6 as Weight))
 			.saturating_add(T::DbWeight::get().writes(4 as Weight))
 	}
 	fn remove_liquidity() -> Weight {
-		(117_824_000 as Weight)
+		(113_457_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(6 as Weight))
 			.saturating_add(T::DbWeight::get().writes(6 as Weight))
 	}
 	fn sell() -> Weight {
-		(161_873_000 as Weight)
+		(156_753_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(8 as Weight))
 			.saturating_add(T::DbWeight::get().writes(6 as Weight))
 	}
 	fn buy() -> Weight {
-		(160_681_000 as Weight)
+		(156_094_000 as Weight)
 			.saturating_add(T::DbWeight::get().reads(8 as Weight))
 			.saturating_add(T::DbWeight::get().writes(6 as Weight))
 	}
