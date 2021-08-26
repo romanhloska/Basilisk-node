@@ -41,7 +41,7 @@ benchmarks! {
 		// In such case, one additional operation is performed to skip the id (aka worst case)
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
 
-	}: _(RawOrigin::Signed(caller.clone()), name.clone(), AssetType::Token)
+	}: _(RawOrigin::Root, name.clone(), AssetType::Token)
 	verify {
 		let bname = crate::Pallet::<T>::to_bounded_name(name).unwrap();
 		assert_eq!(crate::Pallet::<T>::asset_ids(bname), Some(T::AssetId::from(1u8)));
@@ -52,13 +52,13 @@ benchmarks! {
 
 		let name = b"NAME".to_vec();
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
-		let _ = crate::Pallet::<T>::register(RawOrigin::Signed(caller.clone()).into(), name.clone(), AssetType::Token);
+		let _ = crate::Pallet::<T>::register(RawOrigin::Root.into(), name.clone(), AssetType::Token);
 
 		let new_name= vec![1; T::StringLimit::get() as usize];
 
 		let asset_id = T::AssetId::from(1u8);
 
-	}: _(RawOrigin::Signed(caller.clone()), asset_id, new_name.clone(), AssetType::PoolShare(T::AssetId::from(10u8),T::AssetId::from(20u8)))
+	}: _(RawOrigin::Root, asset_id, new_name.clone(), AssetType::PoolShare(T::AssetId::from(10u8),T::AssetId::from(20u8)))
 	verify {
 		let bname = crate::Pallet::<T>::to_bounded_name(new_name).unwrap();
 		assert_eq!(crate::Pallet::<T>::asset_ids(&bname), Some(T::AssetId::from(1u8)));
@@ -83,13 +83,13 @@ benchmarks! {
 
 		let name = b"NAME".to_vec();
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
-		let _ = crate::Pallet::<T>::register(RawOrigin::Signed(caller.clone()).into(), name.clone(), AssetType::Token);
+		let _ = crate::Pallet::<T>::register(RawOrigin::Root.into(), name.clone(), AssetType::Token);
 
 		let asset_id = T::AssetId::from(1u8);
 
 		let max_symbol = vec![1; T::StringLimit::get() as usize];
 
-	}: _(RawOrigin::Signed(caller.clone()), asset_id, max_symbol.clone(), 10u8)
+	}: _(RawOrigin::Root, asset_id, max_symbol.clone(), 10u8)
 	verify {
 		let bname = crate::Pallet::<T>::to_bounded_name(name).unwrap();
 		let bsymbol= crate::Pallet::<T>::to_bounded_name(max_symbol).unwrap();
@@ -115,11 +115,11 @@ benchmarks! {
 
 		let name = b"NAME".to_vec();
 		assert_eq!(crate::Pallet::<T>::next_asset_id(), T::AssetId::from(0u8));
-		let _ = crate::Pallet::<T>::register(RawOrigin::Signed(caller.clone()).into(), name.clone(), AssetType::Token);
+		let _ = crate::Pallet::<T>::register(RawOrigin::Root.into(), name.clone(), AssetType::Token);
 
 		let asset_id = T::AssetId::from(1u8);
 
-	}: _(RawOrigin::Signed(caller.clone()), asset_id, Default::default())
+	}: _(RawOrigin::Root, asset_id, Default::default())
 	verify {
 		let bname = crate::Pallet::<T>::to_bounded_name(name).unwrap();
 		let bsymbol= crate::Pallet::<T>::to_bounded_name(b"SYMBOL".to_vec()).unwrap();
