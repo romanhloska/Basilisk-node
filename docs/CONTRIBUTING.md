@@ -50,7 +50,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 1. Make your changes in a new git branch:
 
      ```shell
-     git checkout -b fix/my-branch master
+     git checkout -b my-branch master
      ```
 
 1. Create your patch, **including appropriate test cases**.
@@ -67,7 +67,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 1. Push your branch to GitHub:
 
     ```shell
-    git push origin fix/my-branch
+    git push origin my-branch
     ```
 
 1. In GitHub, send a pull request to `master` or `main` branch.
@@ -87,7 +87,7 @@ from the main (upstream) repository:
 * Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
 
     ```shell
-    git push origin --delete fix/my-branch
+    git push origin --delete my-branch
     ```
 
 * Check out the master branch:
@@ -99,7 +99,7 @@ from the main (upstream) repository:
 * Delete the local branch:
 
     ```shell
-    git branch -D fix/my-branch
+    git branch -D my-branch
     ```
 
 * Update your master with the latest upstream version:
