@@ -81,8 +81,8 @@ jobs:
         uses: codota/toolchain@00a8bf2bdcfe93aefd70422d3dec07337959d3a4
         with:
           profile: minimal
-      - name: Install clippy
-        run: rustup component add clippy
+      - name: Check locked deps are up to date
+        run: cargo tree --locked
       - name: Run clippy
         run: make clippy
         continue-on-error: false
