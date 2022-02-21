@@ -116,6 +116,9 @@ pub mod pallet {
 
 		/// Incorrect number of assets provided to create shared asset.
 		InvalidSharedAssetLen,
+
+		/// Native asset location is not allowed
+		NativeAssetLocationNotAllowed,
 	}
 
 	#[pallet::storage]
@@ -341,6 +344,7 @@ pub mod pallet {
 			T::RegistryOrigin::ensure_origin(origin)?;
 
 			ensure!(Self::assets(asset_id).is_some(), Error::<T>::AssetNotRegistered);
+			ensure!(asset_id != T::NativeAssetId::get(), Error::<T>::NativeAssetLocationNotAllowed);
 
 			AssetLocations::<T>::insert(asset_id, &location);
 			LocationAssets::<T>::insert(&location, asset_id);

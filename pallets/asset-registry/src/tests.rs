@@ -147,6 +147,27 @@ fn location_mapping_works() {
 }
 
 #[test]
+fn register_asset_not_allowed() {
+	ExtBuilder::default()
+		.with_native_asset_name(b"NATIVE".to_vec())
+		.build()
+		.execute_with(|| {
+			let asset_id: AssetId =
+				AssetRegistryPallet::get_or_create_asset(b"NATIVE".to_vec(), AssetType::Token, 1_000u128).unwrap();
+
+			let asset_location = AssetLocation(X3(Parent, Parachain(200), GeneralKey(asset_id.encode())));
+
+			assert_noop!(AssetRegistryPallet::set_location(
+				Origin::root(),
+				asset_id,
+				asset_location.clone()),
+			Error::<Test>::NativeAssetLocationNotAllowed
+		);
+
+		});
+}
+
+#[test]
 fn genesis_config_works() {
 	ExtBuilder::default()
 		.with_native_asset_name(b"NATIVE".to_vec())
