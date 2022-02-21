@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["pallet_lbp_rpc_runtime_api"] = [{"text":"impl&lt;Block:&nbsp;BlockT, AccountId, AssetId&gt; RuntimeApiInfo for dyn <a class=\"trait\" href=\"pallet_lbp_rpc_runtime_api/trait.LBPApi.html\" title=\"trait pallet_lbp_rpc_runtime_api::LBPApi\">LBPApi</a>&lt;Block, AccountId, AssetId&gt;","synthetic":false,"types":[]}];
+implementors["pallet_xyk_rpc_runtime_api"] = [{"text":"impl&lt;Block:&nbsp;BlockT, AccountId, AssetId, Balance&gt; RuntimeApiInfo for dyn <a class=\"trait\" href=\"pallet_xyk_rpc_runtime_api/trait.XYKApi.html\" title=\"trait pallet_xyk_rpc_runtime_api::XYKApi\">XYKApi</a>&lt;Block, AccountId, AssetId, Balance&gt;","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["basilisk_runtime"] = [{"text":"impl OriginTrait for <a class=\"struct\" href=\"basilisk_runtime/struct.Origin.html\" title=\"struct basilisk_runtime::Origin\">Origin</a>","synthetic":false,"types":["basilisk_runtime::Origin"]}];
+implementors["testing_basilisk_runtime"] = [{"text":"impl OriginTrait for <a class=\"struct\" href=\"testing_basilisk_runtime/struct.Origin.html\" title=\"struct testing_basilisk_runtime::Origin\">Origin</a>","synthetic":false,"types":["testing_basilisk_runtime::Origin"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

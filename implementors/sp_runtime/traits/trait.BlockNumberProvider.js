@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["basilisk_runtime"] = [{"text":"impl&lt;T:&nbsp;Config&gt; BlockNumberProvider for <a class=\"struct\" href=\"basilisk_runtime/struct.RelayChainBlockNumberProvider.html\" title=\"struct basilisk_runtime::RelayChainBlockNumberProvider\">RelayChainBlockNumberProvider</a>&lt;T&gt;","synthetic":false,"types":["basilisk_runtime::RelayChainBlockNumberProvider"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

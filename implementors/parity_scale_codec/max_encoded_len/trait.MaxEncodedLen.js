@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["common_runtime"] = [{"text":"impl MaxEncodedLen for <a class=\"enum\" href=\"common_runtime/enum.ProxyType.html\" title=\"enum common_runtime::ProxyType\">ProxyType</a>","synthetic":false,"types":["common_runtime::ProxyType"]}];
+implementors["primitives"] = [{"text":"impl MaxEncodedLen for <a class=\"enum\" href=\"primitives/enum.ReserveIdentifier.html\" title=\"enum primitives::ReserveIdentifier\">ReserveIdentifier</a>","synthetic":false,"types":["primitives::ReserveIdentifier"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

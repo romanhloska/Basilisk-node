@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["basilisk","basilisk_runtime","common_runtime","pallet_asset_registry","pallet_duster","pallet_exchange","pallet_exchange_benchmarking","pallet_lbp","pallet_lbp_rpc","pallet_lbp_rpc_runtime_api","pallet_nft","pallet_xyk","pallet_xyk_rpc","pallet_xyk_rpc_runtime_api","primitives","runtime_integration_tests","testing_basilisk_runtime"];

@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["basilisk_runtime"] = [{"text":"impl WeightTrader for <a class=\"struct\" href=\"basilisk_runtime/xcm/struct.TradePassthrough.html\" title=\"struct basilisk_runtime::xcm::TradePassthrough\">TradePassthrough</a>","synthetic":false,"types":["basilisk_runtime::xcm::TradePassthrough"]}];
+implementors["testing_basilisk_runtime"] = [{"text":"impl WeightTrader for <a class=\"struct\" href=\"testing_basilisk_runtime/xcm/struct.TradePassthrough.html\" title=\"struct testing_basilisk_runtime::xcm::TradePassthrough\">TradePassthrough</a>","synthetic":false,"types":["testing_basilisk_runtime::xcm::TradePassthrough"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

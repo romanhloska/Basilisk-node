@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["basilisk_runtime"] = [{"text":"impl WeightToFeePolynomial for <a class=\"struct\" href=\"basilisk_runtime/struct.WeightToFee.html\" title=\"struct basilisk_runtime::WeightToFee\">WeightToFee</a>","synthetic":false,"types":["basilisk_runtime::WeightToFee"]}];
+implementors["testing_basilisk_runtime"] = [{"text":"impl WeightToFeePolynomial for <a class=\"struct\" href=\"testing_basilisk_runtime/struct.WeightToFee.html\" title=\"struct testing_basilisk_runtime::WeightToFee\">WeightToFee</a>","synthetic":false,"types":["testing_basilisk_runtime::WeightToFee"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

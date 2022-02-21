@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["basilisk_runtime"] = [{"text":"impl InstanceFilter&lt;<a class=\"enum\" href=\"basilisk_runtime/enum.Call.html\" title=\"enum basilisk_runtime::Call\">Call</a>&gt; for <a class=\"enum\" href=\"basilisk_runtime/enum.ProxyType.html\" title=\"enum basilisk_runtime::ProxyType\">ProxyType</a>","synthetic":false,"types":["common_runtime::ProxyType"]}];
+implementors["testing_basilisk_runtime"] = [{"text":"impl InstanceFilter&lt;<a class=\"enum\" href=\"testing_basilisk_runtime/enum.Call.html\" title=\"enum testing_basilisk_runtime::Call\">Call</a>&gt; for <a class=\"enum\" href=\"testing_basilisk_runtime/enum.ProxyType.html\" title=\"enum testing_basilisk_runtime::ProxyType\">ProxyType</a>","synthetic":false,"types":["common_runtime::ProxyType"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

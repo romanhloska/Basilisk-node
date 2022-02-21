@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["common_runtime"] = [{"text":"impl&lt;T:&nbsp;Config&gt; MultiLockableCurrency&lt;&lt;T as Config&gt;::AccountId&gt; for <a class=\"struct\" href=\"common_runtime/adapter/struct.OrmlTokensAdapter.html\" title=\"struct common_runtime::adapter::OrmlTokensAdapter\">OrmlTokensAdapter</a>&lt;T&gt;","synthetic":false,"types":["common_runtime::adapter::OrmlTokensAdapter"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["basilisk"] = [{"text":"impl Extension for <a class=\"struct\" href=\"basilisk/chain_spec/struct.ExtensionsFork.html\" title=\"struct basilisk::chain_spec::ExtensionsFork\">ExtensionsFork</a>","synthetic":false,"types":["basilisk::chain_spec::ExtensionsFork"]},{"text":"impl Extension for <a class=\"struct\" href=\"basilisk/chain_spec/struct.Extensions.html\" title=\"struct basilisk::chain_spec::Extensions\">Extensions</a>","synthetic":false,"types":["basilisk::chain_spec::Extensions"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

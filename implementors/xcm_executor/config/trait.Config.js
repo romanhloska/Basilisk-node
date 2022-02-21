@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["basilisk_runtime"] = [{"text":"impl Config for <a class=\"struct\" href=\"basilisk_runtime/xcm/struct.XcmConfig.html\" title=\"struct basilisk_runtime::xcm::XcmConfig\">XcmConfig</a>","synthetic":false,"types":["basilisk_runtime::xcm::XcmConfig"]}];
+implementors["testing_basilisk_runtime"] = [{"text":"impl Config for <a class=\"struct\" href=\"testing_basilisk_runtime/xcm/struct.XcmConfig.html\" title=\"struct testing_basilisk_runtime::xcm::XcmConfig\">XcmConfig</a>","synthetic":false,"types":["testing_basilisk_runtime::xcm::XcmConfig"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
