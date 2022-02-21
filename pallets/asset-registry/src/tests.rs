@@ -161,8 +161,8 @@ fn register_asset_not_allowed() {
 				Origin::root(),
 				asset_id,
 				asset_location.clone()),
-			Error::<Test>::NativeAssetLocationNotAllowed
-		);
+				Error::<Test>::NativeAssetLocationNotAllowed
+			);
 
 		});
 }
