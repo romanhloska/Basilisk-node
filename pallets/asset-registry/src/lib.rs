@@ -46,7 +46,7 @@ pub use pallet::*;
 
 use crate::types::{AssetDetails, AssetMetadata};
 use frame_support::BoundedVec;
-use hydradx_traits::{Registry, ShareTokenRegistry};
+use hydradx_traits::{RegistryInspect, RegistryRetrieve, RegistryCreate, Registry, ShareTokenRegistry};
 
 #[frame_support::pallet]
 pub mod pallet {
@@ -429,6 +429,33 @@ impl<T: Config> Pallet<T> {
 	/// Return asset for given loation.
 	pub fn location_to_asset(location: T::AssetNativeLocation) -> Option<T::AssetId> {
 		Self::location_assets(location)
+	}
+}
+
+impl<T: Config> RegistryInspect<T::AssetId, T::Balance> for Pallet<T> {
+	fn exists(name: T::AssetId) -> bool {
+		Assets::<T>::contains_key(&asset_id)
+	}
+
+	fn existential_deposit(name: T::AssetId) -> Result<T::AssetId, T::Balance> {
+		todo!()
+	}
+}
+
+impl<T: Config> RegistryRetrieve<T::AssetId, Vec<u8>, DispatchError> for Pallet<T> {
+	fn retrieve_asset(name: &Vec<u8>) -> Result<T::AssetId, DispatchError> {
+		let bounded_name = Self::to_bounded_name(name.clone())?;
+		if let Some(asset_id) = AssetIds::<T>::get(&bounded_name) {
+			Ok(asset_id)
+		} else {
+			Err(Error::<T>::AssetNotFound.into())
+		}
+	}
+}
+
+impl<T: Config> RegistryCreate<T::AssetId, Vec<u8>, T::Balance, DispatchError> for Pallet<T> {
+	fn create_asset(name: &Vec<u8>, existential_deposit: T::Balance) -> Result<T::AssetId, DispatchError> {
+		Self::get_or_create_asset(name.clone(), AssetType::Token, existential_deposit)
 	}
 }
 
